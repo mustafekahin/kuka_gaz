@@ -1,0 +1,33 @@
+<launch>
+	<arg name="robot_name" default="kuka_kr16_2" />
+	<!-- arg name="use_ros_control" default="True" /! -->
+	<!-- Load the kuka_kr16 URDF model into the parameter server -->
+	<param name="robot_description" command="$(find xacro)/xacro '$(find kuka_kr16_support)/urdf/test.urdf'
+  robot_name:=$(arg robot_name)
+    " />
+	<!-- Start Gazebo with an empty world -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch" />
+	<!--
+	Spawn kuka_kr16 in Gazebo, taking the description from the
+	parameter server
+	-->
+	<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model kuka_kr16_2" />
+	<rosparam file="$(find kr16_control)/config/kr16_controllers.yaml" command="load" />
+	<!-- load the controllers -->
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="kr16_2" args="
+    joint1_position_controller 
+    joint2_position_controller
+    joint3_position_controller 
+    joint4_position_controller
+    joint5_position_controller 
+    joint6_position_controller 
+    joint_state_controller" />
+	<!--
+	node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+	<remap from="kr16/joint_states" to="/kr16_2/joint_states" />
+	</node!
+	-->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+		<remap from="/joint_states" to="/kr16_2/joint_states" />
+	</node>
+</launch>

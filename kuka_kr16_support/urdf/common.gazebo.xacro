@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+	<!-- arg name="use_ros_control" default="true" /! -->
+	<arg name="control_period" default="0.001" />
+	<!-- arg name="motors_controller_type" default="PositionJointInterface" /! -->
+	<!-- PositionJointInterface VelocityJointInterface  EffortJointInterface -->
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>
+				/kr16_2
+			</robotNamespace>
+			<robotSimType>
+				gazebo_ros_control/DefaultRobotHWSim
+			</robotSimType>
+			<controlPeriod>
+				0.001
+			</controlPeriod>
+		</plugin>
+		<plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+			<robotNamespace>
+				/kr16_2
+			</robotNamespace>
+			<jointName>
+				joint_a1,
+				joint_a2,
+				joint_a3,
+				joint_a4,
+				joint_a5,
+				joint_a6
+			</jointName>
+		</plugin>
+	</gazebo>
+</robot>

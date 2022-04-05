@@ -1,0 +1,47 @@
+kr16_2:
+   #Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+  
+  # Position Controllers ---------------------------------------
+  
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_a1
+    pid: { p: 100.0, i: 0.01, d: 10.0 }
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_a2
+    pid: { p: 100.0, i: 0.01, d: 10.0 }
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_a3
+    pid: { p: 100.0, i: 0.01, d: 10.0 }
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_a4
+    pid: { p: 100.0, i: 0.01, d: 10.0 }
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_a5
+    pid: { p: 100.0, i: 0.01, d: 10.0 }
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_a6
+    pid: { p: 100.0, i: 0.01, d: 10.0 }
+
+#ros_control_namespace: /kr16/
+#controller_list:
+ # - name: position_trajectory_controller
+  #  action_ns: follow_joint_trajectory
+   # type: FollowJointTrajectory
+    #default: True
+    #joints:
+     # - joint_a1
+      #- joint_a2
+      #- joint_a3
+      #- joint_a4
+      #- joint_a5
+      #- joint_a6
+  # Position Controllers ---------------------------------------
